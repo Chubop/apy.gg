@@ -2,7 +2,7 @@ import os
 import openai
 import re
 
-openai.api_key = "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"
+openai.api_key = os.environ["openai_key"]
 raw_text = "[('4.00', 'ions. 4.00 % apy* no'), ('4.00', 'ions. 4.00 % apy* no'), ('4.00', 'hrony 4.00 % apy* $5'), ('4.00', 'hrony 4.00 % apy* $5'), ('0.02', 'chase 0.02 % apy* $5'), ('0.02', 'chase 0.02 % apy* $5'), ('0.01', ' bank 0.01 % apy* $5'), ('0.01', ' bank 0.01 % apy* $5'), ('0.32', 'erage 0.32 % apy* $5'), ('0.32', 'erage 0.32 % apy* $5'), ('4.00', 'hrony 4.00 % apy* $5'), ('4.00', 'hrony 4.00 % apy* $5'), ('0.02', 'chase 0.02 % apy* $5'), ('0.02', 'chase 0.02 % apy* $5'), ('0.01', ' bank 0.01 % apy* $5'), ('0.01', ' bank 0.01 % apy* $5'), ('0.32', 'erage 0.32 % apy* $5'), ('0.32', 'erage 0.32 % apy* $5'), ('4.00%', ',999 4.00% apy* depo'), ('4.00%', ',999 4.00% apy* depo'), ('4.00%', ',999 4.00% apy* depo'), ('4.00%', ',999 4.00% apy* depo'), ('4.00%', '.01+ 4.00% apy* open'), ('4.00%', '.01+ 4.00% apy* open'), ('2.25%', 'mas) 2.25% apy* no m'), ('2.25%', 'mas) 2.25% apy* no m'), ('4.50%', 'cds) 4.50% apy* at 1'), ('4.50%', 'cds) 4.50% apy* at 1')]"
 def get_apy(raw_text):
     completion = openai.ChatCompletion.create(

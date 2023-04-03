@@ -71,4 +71,5 @@ def find_strings(tag):
             find_strings(child)
     return str
 
+
 x = find_strings(soup)

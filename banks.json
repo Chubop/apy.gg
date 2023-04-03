@@ -1,6 +1,11 @@
 {
    "banks":[
       {
+         "name":"Discover",
+         "apy_source_url":"https://www.discover.com/online-banking/savings-account/",
+         "expected_rate": 3.60
+      },
+      {
          "name":"Ally",
          "apy_source_url":"https://www.ally.com/bank/online-savings-account/",
          "expected_rate": 3.75
@@ -14,11 +19,6 @@
          "name":"CIT",
          "apy_source_url":"https://www.cit.com/cit-bank/bank/savings/platinum-savings-account",
          "expected_rate": 4.75
-      },
-      {
-         "name":"Discover",
-         "apy_source_url":"https://www.discover.com/online-banking/savings-account/",
-         "expected_rate": 3.60
       },
       {
          "name":"Marcus by Goldman Sachs",
