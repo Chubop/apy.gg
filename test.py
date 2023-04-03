@@ -1,6 +1,7 @@
 import unittest
 import json
 from scrape import scrape_site
+from gpt import get_apy
 
 
 class TestScrapingAccuracy(unittest.TestCase):
@@ -8,9 +9,13 @@ class TestScrapingAccuracy(unittest.TestCase):
         with open('banks.json', 'r') as file:
             banks = json.load(file)
         for bank in banks['banks']:
-            print('Testing', bank['name'])
-            apy = scrape_site(bank['apy_source_url'])
-            is_match = apy == bank['expected_rate']
+            x, y, z = bank['name'], bank['apy_source_url'], bank['expected_rate']
+            print('Testing', x)
+            apys = scrape_site(y)
+            apy = get_apy(apys)
+            is_match = apy == z
             print('\t', end="")
-            print(is_match if is_match is True else 'expected', bank['expected_rate'], ', got', apy)
-            self.assertEqual(apy, bank['expected_rate'])
+            print(is_match if is_match is True else 'expected', z, ', got', apy)
+            with self.subTest(msg=x):
+                self.assertEqual(apy, z)
+
