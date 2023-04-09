@@ -1,4 +1,5 @@
 from playwright.async_api import async_playwright
+from playwright._impl._api_types import TimeoutError
 import time, re, asyncio
 from sys import platform
 from pprint import pprint
@@ -30,7 +31,13 @@ class Crawler:
         await self.playwright.stop()
 
     async def go_to_page(self, url):
-        await self.page.goto(url=url if "://" in url else "http://" + url)
+        TIMEOUT = 15000
+        try:
+            # wait 15 seconds for the page to finish javascript, if it has a constant script then just read it
+            # after 15000ms (15 seconds)
+            await self.page.goto(url=url if "://" in url else "http://" + url, wait_until='networkidle', timeout=TIMEOUT)
+        except TimeoutError:
+            print('Timed out while loading page:', url, ', trying anyways')
         self.client = await self.page.context.new_cdp_session(self.page)
         self.page_element_buffer = {}
 
@@ -432,7 +439,6 @@ async def scrape_bank(url, debug=False):
 
     # TODO: this is O(n^2)
     while not found_float:
-        at_bottom = await _crawler.finished_scrolling()
         elements_of_interest = await _crawler.crawl()
         if debug is True:
             pprint(elements_of_interest)
@@ -444,6 +450,8 @@ async def scrape_bank(url, debug=False):
                 await _crawler.browser.close()  # might be redundant with the new stop() function
                 await _crawler.stop()
                 return float(scraped_float)
+
+        at_bottom = await _crawler.finished_scrolling()
         if not at_bottom:
             # if we haven't found the float but still have page space, restart the search
             # after scrolling down.
@@ -456,5 +464,5 @@ async def scrape_bank(url, debug=False):
 
 
 if __name__ == "__main__":
-    apy = asyncio.run(scrape_bank("https://www.secure.citizensaccess.com/Citizens/save", debug=True))
+    apy = asyncio.run(scrape_bank("https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/", debug=True))
     print(apy)
