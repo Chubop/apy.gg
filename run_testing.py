@@ -26,6 +26,7 @@ async def check_bank_scraper():
         whole += 1
     print("===RESULTS===")
     print(str(valids) + '/' + str(whole), "tests passed.")
+    print(str(float(valids / whole)) + '%', "success rate")
     if len(failed_banks) > 0:
         print("Failed Banks: ")
         pprint(failed_banks)
