@@ -43,7 +43,7 @@
       {
          "name":"Capital One",
          "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
-         "expected_rate": 3.40
+         "expected_rate": 3.50
       },
       {
          "name":"Alliant Credit Union",
@@ -63,8 +63,8 @@
       },
       {
          "name":"PurePoint Financial",
-         "expected_rate": -1,
-         "apy_source_url":""
+         "expected_rate": 0.1,
+         "apy_source_url":"https://www.purepoint.com/marketing/savings-account/high-yield?adid=554a4d35-9aac-3fee-33ed-0db073af4d66&cm_mmc=bing-_-savings-_-dallas-_-banks%20with%20high%20interest%20savings"
       },
       {
          "name":"HSBC Direct",
@@ -104,7 +104,7 @@
       {
          "name":"Popular Direct",
          "apy_source_url":"https://www.populardirect.com/products/savings",
-         "expected_rate": 4.45
+         "expected_rate": 4.55
       },
       {
          "name":"Live Oak Bank",
