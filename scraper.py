@@ -35,7 +35,7 @@ class Crawler:
         try:
             # wait 15 seconds for the page to finish javascript, if it has a constant script then just read it
             # after 15000ms (15 seconds)
-            await self.page.goto(url=url if "://" in url else "http://" + url, wait_until='networkidle', timeout=TIMEOUT)
+            await self.page.goto(url=url if "://" in url else "http://" + url, wait_until="networkidle", timeout=TIMEOUT)
         except TimeoutError:
             print('Timed out while loading page:', url, ', trying anyways')
         self.client = await self.page.context.new_cdp_session(self.page)
