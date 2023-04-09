@@ -1,11 +1,6 @@
 {
    "banks":[
       {
-         "name":"Capital One",
-         "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
-         "expected_rate": 3.50
-      },
-      {
          "name":"PNC Bank",
          "apy_source_url":"https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html",
          "expected_rate":4.00,
