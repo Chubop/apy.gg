@@ -1,6 +1,16 @@
 {
    "banks":[
       {
+         "name":"Capital One",
+         "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
+         "expected_rate": 3.50
+      },
+      {
+         "name":"Citizens",
+         "apy_source_url":"https://www.secure.citizensaccess.com/Citizens/save",
+         "expected_rate": 4.25
+      },
+      {
          "name":"Discover",
          "apy_source_url":"https://www.discover.com/online-banking/savings-account/",
          "expected_rate": 3.60
@@ -11,14 +21,9 @@
          "expected_rate": 3.75
       },
       {
-         "name":"Citizens",
-         "apy_source_url":"https://www.secure.citizensaccess.com/Citizens/save",
-         "expected_rate": 4.25
-      },
-      {
          "name":"CIT",
          "apy_source_url":"https://www.cit.com/cit-bank/bank/savings/platinum-savings-account",
-         "expected`_rate": 4.75
+         "expected_rate": 4.75
       },
       {
          "name":"Marcus by Goldman Sachs",
@@ -41,11 +46,6 @@
          "expected_rate": 3.80
       },
       {
-         "name":"Capital One",
-         "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
-         "expected_rate": 3.50
-      },
-      {
          "name":"Alliant Credit Union",
          "apy_source_url":"https://www.alliantcreditunion.org/bank/high-yield-savings",
          "expected_rate": 3.10
@@ -53,13 +53,13 @@
       {
          "name":"TIAA Bank",
          "apy_source_url":"https://www.tiaabank.com/banking/rates?accounts=savings",
-         "expected_rate": 3.85
+         "expected_rate": 4.25
       },
       {
          "name":"PNC Bank",
          "apy_source_url":"https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html",
          "expected_rate": 4.00,
-         "requires_zip":true
+         "requires_zip": true
       },
       {
          "name":"PurePoint Financial",
