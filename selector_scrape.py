@@ -1,7 +1,6 @@
-from playwright.sync_api import sync_playwright
 from playwright.async_api import async_playwright
 import time, re, asyncio
-from sys import argv, exit, platform
+from sys import platform
 from pprint import pprint
 
 black_listed_elements = set(
