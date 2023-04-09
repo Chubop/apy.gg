@@ -1,11 +1,6 @@
 {
    "banks":[
       {
-         "name":"CIT",
-         "apy_source_url":"https://www.cit.com/cit-bank/bank/savings/platinum-savings-account",
-         "expected_rate":4.75
-      },
-      {
          "name":"Capital One",
          "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
          "expected_rate": 3.50

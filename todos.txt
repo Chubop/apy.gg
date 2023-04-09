@@ -1,5 +1,3 @@
-CIT Failure: due to not scrolling down enough to see the rate
-    - Fix: if number is not found, scroll to the bottom of the page and rescan until there isn't anything left.
 PNC Bank Failure: asks for zip code
     - Fix: if no number is found and instead an input field with "zip" in the id or name, fill the field out and then scan away
 PurePoint Financial failure: 0.01 instead of 0.1, for some reason there is a 0.01
