@@ -8,6 +8,9 @@ black_listed_elements = set(
 
 
 class Crawler:
+    class SCROLL_DIRECTIONS:
+        Down = "down"
+        Up = "up"
 
     @staticmethod
     async def run(self):
