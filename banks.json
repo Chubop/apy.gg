@@ -18,7 +18,7 @@
       {
          "name":"CIT",
          "apy_source_url":"https://www.cit.com/cit-bank/bank/savings/platinum-savings-account",
-         "expected_rate": 4.75
+         "expected`_rate": 4.75
       },
       {
          "name":"Marcus by Goldman Sachs",
