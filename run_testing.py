@@ -8,7 +8,8 @@ async def check_bank_scraper():
     whole = valids = 0
     failed_banks = []
     print("Starting test.")
-    with open('banks.json', 'r') as file:
+    file_name = 'banks.json'
+    with open(file_name, 'r') as file:
         banks = json.load(file)
 
     for bank in banks['banks']:
@@ -16,7 +17,7 @@ async def check_bank_scraper():
         print(f'Testing {name}...', end="")
         apy = await scrape_bank(url=url)
         is_match = apy == expected_rate
-        if is_match == True:
+        if is_match:
             print('\t' + str(is_match))
             valids += 1
         else:
