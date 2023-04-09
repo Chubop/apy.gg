@@ -1,6 +1,6 @@
 import asyncio, json, io
 from contextlib import redirect_stdout
-from selector_scrape import scrape_bank
+from scraper import scrape_bank
 from pprint import pprint
 
 
