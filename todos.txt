@@ -1,18 +1,6 @@
 CIT Failure: due to not scrolling down enough to see the rate
     - Fix: if number is not found, scroll to the bottom of the page and rescan until there isn't anything left.
-Capital One: finding a -1
-    - Fix unknown, need to investigate as the number is right there
-Alliant Credit Union: instead of finding the APY% of 3.10, it locates the nearby dividend rate instead.
-    - Fix: if there are two numbers next to each other, find the one that comes right after a keyword like APY.
 PNC Bank Failure: asks for zip code
     - Fix: if no number is found and instead an input field with "zip" in the id or name, fill the field out and then scan away
 PurePoint Financial failure: 0.01 instead of 0.1, for some reason there is a 0.01
-    - Fix unknown
-HSBC Direct: looks like it might be picking up 9.99 from the "$25,000 - $99,99*9.99*"
-    - Fix: ensure that the float values are not apart of a greater number
-CIBC Failure: no scrolling
-    - Fix: if number is not found, scroll to the bottom of the page
-Bread Financial Failure: interest rate found first instead of APY
-    - Fix: if there are two numbers next to each other, find the one that comes right after a keyword like APY.
-Live Oak Bank Failure: 3.6 instead of 4.0, needs investigation
     - Fix unknown
