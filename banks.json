@@ -169,11 +169,6 @@
          "leave_off_point": true
       },
       {
-         "name": "Comenity Direct",
-         "apy_source_url": "https://www.comenitydirect.com/comenity/online-savings",
-         "expected_rate": 3.80
-      },
-      {
          "name": "SoFi Money",
          "apy_source_url": "https://www.sofi.com/money/",
          "expected_rate": 4.00
