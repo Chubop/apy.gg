@@ -104,7 +104,7 @@
       {
          "name":"Popular Direct",
          "apy_source_url":"https://www.populardirect.com/products/savings",
-         "expected_rate": 4.55
+         "expected_rate": 4.65
       },
       {
          "name":"Live Oak Bank",
@@ -166,7 +166,6 @@
          "apy_source_url": "https://www.bmo.com/en-us/main/personal/onlinesavingsaccount/?zipcode=45243",
          "expected_rate": 4.20,
          "requires_zip": true,
-         "leave_off_point": true
       },
       {
          "name": "SoFi Money",
