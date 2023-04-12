@@ -1,5 +1,6 @@
 from playwright.async_api import async_playwright
 from playwright._impl._api_types import TimeoutError
+from playwright._impl._api_types import Error
 import time, re, asyncio
 from sys import platform
 from pprint import pprint
@@ -38,6 +39,8 @@ class Crawler:
             await self.page.goto(url=url if "://" in url else "http://" + url, wait_until="networkidle", timeout=TIMEOUT)
         except TimeoutError:
             print('Timed out while loading page:', url, ', trying anyways')
+        except Error:
+            print('URL', url, 'is invalid')
         self.client = await self.page.context.new_cdp_session(self.page)
         self.page_element_buffer = {}
 
@@ -464,5 +467,5 @@ async def scrape_bank(url, debug=False):
 
 
 if __name__ == "__main__":
-    apy = asyncio.run(scrape_bank("https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/", debug=True))
+    apy = asyncio.run(scrape_bank("https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html", debug=True))
     print(apy)
