@@ -1,6 +1,6 @@
 import asyncio, json, io
 from contextlib import redirect_stdout
-from selector_scrape import scrape_bank
+from scraper import scrape_bank
 from pprint import pprint
 
 
@@ -8,7 +8,8 @@ async def check_bank_scraper():
     whole = valids = 0
     failed_banks = []
     print("Starting test.")
-    with open('banks.json', 'r') as file:
+    file_name = 'banks.json'
+    with open(file_name, 'r') as file:
         banks = json.load(file)
 
     for bank in banks['banks']:
@@ -16,7 +17,7 @@ async def check_bank_scraper():
         print(f'Testing {name}...', end="")
         apy = await scrape_bank(url=url)
         is_match = apy == expected_rate
-        if is_match == True:
+        if is_match:
             print('\t' + str(is_match))
             valids += 1
         else:
@@ -25,6 +26,7 @@ async def check_bank_scraper():
         whole += 1
     print("===RESULTS===")
     print(str(valids) + '/' + str(whole), "tests passed.")
+    print(str(float(valids / whole)) + '%', "success rate")
     if len(failed_banks) > 0:
         print("Failed Banks: ")
         pprint(failed_banks)

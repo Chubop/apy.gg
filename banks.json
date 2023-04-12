@@ -1,5 +1,15 @@
 {
-   "banks":[
+   "banks": [
+      {
+         "name":"Capital One",
+         "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
+         "expected_rate": 3.50
+      },
+      {
+         "name":"Citizens",
+         "apy_source_url":"https://www.secure.citizensaccess.com/Citizens/save",
+         "expected_rate": 4.25
+      },
       {
          "name":"Discover",
          "apy_source_url":"https://www.discover.com/online-banking/savings-account/",
@@ -9,11 +19,6 @@
          "name":"Ally",
          "apy_source_url":"https://www.ally.com/bank/online-savings-account/",
          "expected_rate": 3.75
-      },
-      {
-         "name":"Citizens",
-         "apy_source_url":"https://www.secure.citizensaccess.com/Citizens/save",
-         "expected_rate": 4.25
       },
       {
          "name":"CIT",
@@ -41,11 +46,6 @@
          "expected_rate": 3.80
       },
       {
-         "name":"Capital One",
-         "apy_source_url":"https://www.capitalone.com/bank/savings-accounts/online-performance-savings-account/",
-         "expected_rate": 3.50
-      },
-      {
          "name":"Alliant Credit Union",
          "apy_source_url":"https://www.alliantcreditunion.org/bank/high-yield-savings",
          "expected_rate": 3.10
@@ -53,13 +53,13 @@
       {
          "name":"TIAA Bank",
          "apy_source_url":"https://www.tiaabank.com/banking/rates?accounts=savings",
-         "expected_rate": 3.85
+         "expected_rate": 4.25
       },
       {
          "name":"PNC Bank",
          "apy_source_url":"https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html",
          "expected_rate": 4.00,
-         "requires_zip":true
+         "requires_zip": true
       },
       {
          "name":"PurePoint Financial",
@@ -104,12 +104,103 @@
       {
          "name":"Popular Direct",
          "apy_source_url":"https://www.populardirect.com/products/savings",
-         "expected_rate": 4.55
+         "expected_rate": 4.65
       },
       {
          "name":"Live Oak Bank",
          "apy_source_url":"https://www.liveoakbank.com/personal-banking/personal-savings/",
          "expected_rate": 4.00
+      },
+      {
+         "name": "Upgrade",
+         "apy_source_url": "https://www.upgrade.com/premier-savings/",
+         "expected_rate": 4.38
+      },
+      {
+         "name": "Betterment",
+         "apy_source_url": "https://www.betterment.com/cash-reserve",
+         "expected_rate": 4.20
+      },
+      {
+         "name": "Quontic",
+         "apy_source_url": "https://www.quontic.com/banking/savings/",
+         "expected_rate": 4.05
+      },
+      {
+         "name": "CFG Bank",
+         "apy_source_url": "https://www.cfg.bank/personal-banking/personal-deposit-rates/",
+         "expected_rate": 5.20
+      },
+      {
+         "name": "Newtek Bank",
+         "apy_source_url": "https://www.newtekbank.com/personal/high-yield-savings/#open_account",
+         "expected_rate": 5.00
+      },
+      {
+         "name": "Bask Bank",
+         "apy_source_url": "https://www.baskbank.com/products/interest-savings-account",
+         "expected_rate": 4.45
+      },
+      {
+         "name": "First Foundation",
+         "apy_source_url": "https://www.firstfoundationinc.com/personal-banking/bank/online-savings",
+         "expected_rate": 4.50
+      },
+      {
+         "name": "UFB Direct",
+         "apy_source_url": "https://www.ufbdirect.com/",
+         "expected_rate": 5.02
+      },
+      {
+         "name": "Tab Bank",
+         "apy_source_url": "https://www.tabbank.com/high-yield-savings/",
+         "expected_rate": 4.40
+      },
+      {
+         "name": "Varo Bank",
+         "apy_source_url": "https://www.varomoney.com/saving-account-rates/",
+         "expected_rate": 3.00
+      },
+      {
+         "name": "BMO",
+         "apy_source_url": "https://www.bmo.com/en-us/main/personal/onlinesavingsaccount/?zipcode=45243",
+         "expected_rate": 4.20,
+         "requires_zip": true,
+      },
+      {
+         "name": "SoFi Money",
+         "apy_source_url": "https://www.sofi.com/money/",
+         "expected_rate": 4.00
+      },
+      {
+         "name": "Chime",
+         "apy_source_url": "https://www.chime.com/savings-account/",
+         "expected_rate": 2.00
+      },
+      {
+         "name": "LendingClub",
+         "apy_source_url": "https://www.lendingclub.com/personal/savings/high-yield-savings",
+         "expected_rate": 4.25
+      },
+      {
+         "name": "E*TRADE Bank",
+         "apy_source_url": "https://us.etrade.com/bank/premium-savings-account",
+         "expected_rate": 3.75
+      },
+      {
+         "name": "Green Dot Bank",
+         "apy_source_url": "https://www.greendot.com/benefits/savings-features",
+         "expected_rate": 2.00
+      },
+      {
+         "name": "SmartyPig",
+         "apy_source_url": "https://www.smartypig.com/",
+         "expected_rate": 3.50
+      },
+      {
+         "name": "Wealthfront",
+         "apy_source_url": "https://www.wealthfront.com/cash",
+         "expected_rate": 4.30
       }
    ]
 }

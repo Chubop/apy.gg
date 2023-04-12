@@ -1,7 +1,8 @@
-from playwright.sync_api import sync_playwright
 from playwright.async_api import async_playwright
+from playwright._impl._api_types import TimeoutError
+from playwright._impl._api_types import Error
 import time, re, asyncio
-from sys import argv, exit, platform
+from sys import platform
 from pprint import pprint
 
 black_listed_elements = set(
@@ -9,6 +10,9 @@ black_listed_elements = set(
 
 
 class Crawler:
+    class SCROLL_DIRECTIONS:
+        Down = "down"
+        Up = "up"
 
     @staticmethod
     async def run(self):
@@ -28,7 +32,15 @@ class Crawler:
         await self.playwright.stop()
 
     async def go_to_page(self, url):
-        await self.page.goto(url=url if "://" in url else "http://" + url)
+        TIMEOUT = 15000
+        try:
+            # wait 15 seconds for the page to finish javascript, if it has a constant script then just read it
+            # after 15000ms (15 seconds)
+            await self.page.goto(url=url if "://" in url else "http://" + url, wait_until="networkidle", timeout=TIMEOUT)
+        except TimeoutError:
+            print('Timed out while loading page:', url, ', trying anyways')
+        except Error:
+            print('URL', url, 'is invalid')
         self.client = await self.page.context.new_cdp_session(self.page)
         self.page_element_buffer = {}
 
@@ -69,6 +81,14 @@ class Crawler:
 
     async def enter(self):
         await self.page.keyboard.press("Enter")
+
+    async def finished_scrolling(self) -> bool:
+        """Returns True if the user has scrolled to the bottom of the page, False otherwise."""
+        scroll_height = await self.page.evaluate('document.body.scrollHeight')
+        scroll_top = await self.page.evaluate('document.documentElement.scrollTop || document.body.scrollTop')
+        viewport_height = self.page.viewport_size['height']
+
+        return (scroll_top + viewport_height) >= scroll_height
 
     async def crawl(self):
         page = self.page
@@ -415,27 +435,37 @@ def extract_child(input_string, start_symbol='>', end_symbol='<'):
 
 
 async def scrape_bank(url, debug=False):
-    all_elements = set()
+    found_float = False
     _crawler = Crawler()
     await _crawler.init()
     await _crawler.go_to_page(url)
 
-    elements_of_interest = await _crawler.crawl()
-    all_elements.update(elements_of_interest)
-    if debug is True:
-        pprint(elements_of_interest)
-    for element in all_elements:
-        child = extract_child(element)
-        scraped_float = get_float(child)
-        if scraped_float is not None:
+    # TODO: this is O(n^2)
+    while not found_float:
+        elements_of_interest = await _crawler.crawl()
+        if debug is True:
+            pprint(elements_of_interest)
+        for element in elements_of_interest:
+            child = extract_child(element)
+            scraped_float = get_float(child)
+            if scraped_float is not None:
+                # we found it, close Playwright and return the float.
+                await _crawler.browser.close()  # might be redundant with the new stop() function
+                await _crawler.stop()
+                return float(scraped_float)
+
+        at_bottom = await _crawler.finished_scrolling()
+        if not at_bottom:
+            # if we haven't found the float but still have page space, restart the search
+            # after scrolling down.
+            await _crawler.scroll(_crawler.SCROLL_DIRECTIONS.Down)
+        else:
+            # if we are at the bottom of the page, then no dice, return -1
             await _crawler.browser.close()
             await _crawler.stop()
-            return float(scraped_float)
-
-    await _crawler.browser.close()
-    return -1
+            return -1
 
 
 if __name__ == "__main__":
-    apy = asyncio.run(scrape_bank("https://us.cibc.com/en/agility/agility-savings.html", debug=True))
+    apy = asyncio.run(scrape_bank("https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html", debug=True))
     print(apy)
