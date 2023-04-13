@@ -2,6 +2,7 @@ import asyncio, json, io
 from contextlib import redirect_stdout
 from scraper import scrape_bank
 from pprint import pprint
+from random import shuffle
 
 
 async def check_bank_scraper():
@@ -12,6 +13,7 @@ async def check_bank_scraper():
     with open(file_name, 'r') as file:
         banks = json.load(file)
 
+    shuffle(banks)
     for bank in banks['banks']:
         name, url, expected_rate = bank['name'], bank['apy_source_url'], bank['expected_rate']
         print(f'Testing {name}...', end="")
@@ -24,6 +26,7 @@ async def check_bank_scraper():
             print('\t' + str(is_match), f"Expected {expected_rate}, but got {apy}.")
             failed_banks.append( (name, url))
         whole += 1
+        print('Current Accuracy:', valids, '/', whole, ',', float(valids/whole))
     print("===RESULTS===")
     print(str(valids) + '/' + str(whole), "tests passed.")
     print(str(float(valids / whole)) + '%', "success rate")
