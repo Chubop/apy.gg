@@ -419,7 +419,7 @@ class Crawler:
 
 def get_float(input_string):
     if input_string is None: return None
-    pattern = r'\d\.\d\d'
+    pattern = r'\b\d\.\d\d\b'
     match = re.search(pattern, input_string)
     return (match.group()) if match else None
 
@@ -467,5 +467,5 @@ async def scrape_bank(url, debug=False):
 
 
 if __name__ == "__main__":
-    apy = asyncio.run(scrape_bank("https://www.pnc.com/en/personal-banking/banking/savings/high-yield-savings.html", debug=True))
+    apy = asyncio.run(scrape_bank("https://www.purepoint.com/marketing/savings-account/high-yield?adid=554a4d35-9aac-3fee-33ed-0db073af4d66&cm_mmc=bing-_-savings-_-dallas-_-banks%20with%20high%20interest%20savings", debug=True))
     print(apy)
