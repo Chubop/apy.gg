@@ -165,7 +165,7 @@
          "name": "BMO",
          "apy_source_url": "https://www.bmo.com/en-us/main/personal/onlinesavingsaccount/?zipcode=45243",
          "expected_rate": 4.20,
-         "requires_zip": true,
+         "requires_zip": true
       },
       {
          "name": "SoFi Money",
