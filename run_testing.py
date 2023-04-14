@@ -1,6 +1,5 @@
-import asyncio, json, io
+import asyncio, json
 import data_vis
-from contextlib import redirect_stdout
 from scraper import scrape_bank
 from pprint import pprint
 from random import shuffle
