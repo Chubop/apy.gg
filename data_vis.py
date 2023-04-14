@@ -8,7 +8,7 @@ def map_scraper(accuracy_values: list = [1 / 1, 2 / 2, 3 / 3, 4 / 5, 5 / 6, 5 / 
     # Define the x-values (independent variable)
     x_values = list(range(1, len(accuracy_values) + 1))
 
-    # Calculate the trendline
+    # Calculate the trend-line
     z = np.polyfit(x_values, accuracy_values, 1)
     trendline = np.poly1d(z)
 
