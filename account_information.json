@@ -1,0 +1,25 @@
+{
+  "full_name": "John Doe",
+  "ssn": "123-45-6789",
+  "date_of_birth": "01-01-1985",
+  "contact_information": {
+    "residential_address": "123 Main Street, Anytown, NY 12345",
+    "mailing_address": "123 Main Street, Anytown, NY 12345",
+    "phone_number": "555-123-4567",
+    "email_address": "john.doe@example.com"
+  },
+  "government_issued_id": {
+    "id_type": "driver_license",
+    "id_number": "D1234567",
+    "issue_date": "01-01-2019",
+    "expiry_date": "01-01-2029"
+  },
+  "proof_of_address": {
+    "document_type": "utility_bill",
+    "document_date": "03-01-2023"
+  },
+  "employment_information": {
+    "occupation": "Software Engineer",
+    "annual_income": "90000"
+  }
+}
