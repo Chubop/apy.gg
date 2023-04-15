@@ -1,8 +1,25 @@
 import time
 from pprint import pprint
+from datetime import datetime, timedelta
 import requests
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
+
+FILE_NAME = 'bank_data.txt'
+
+
+def should_run_scraper():
+    try:
+        with open(FILE_NAME, 'r') as f:
+            first_line = f.readline().strip()
+            timestamp = datetime.strptime(first_line, '%m-%d-%Y %I:%M%p')
+
+            if datetime.now() > timestamp + timedelta(days=1, hours=8):
+                return True
+            else:
+                return False
+    except FileNotFoundError:
+        return True
 
 
 def scrape_bank_data():
@@ -31,7 +48,7 @@ def scrape_bank_data():
         for entry in entries:
             bank_div = entry.find('div', class_='bank')
             if bank_div:
-                bank_names.append(bank_div.text.strip().replace("Reviews",""))
+                bank_names.append(bank_div.text.strip().replace("Reviews", ""))
 
             right_div = entry.find('div', class_='right')
             if right_div:
@@ -47,9 +64,19 @@ def scrape_bank_data():
 
 
 if __name__ == '__main__':
-    banks, apys = scrape_bank_data()
-    print('Banks:', banks)
-    print('APYs:', apys)
-    banks_adjusted = list(zip(banks, apys))
-    sorted_list = sorted(banks_adjusted, key=lambda x: float(x[1].strip('%*†')), reverse=True)
-    pprint(sorted_list)
+    if should_run_scraper():
+        banks, apys = scrape_bank_data()
+        print('Banks:', banks)
+        print('APYs:', apys)
+        banks_adjusted = list(zip(banks, apys))
+        sorted_list = sorted(banks_adjusted, key=lambda x: float(x[1].strip('%*†')), reverse=True)
+        pprint(sorted_list)
+
+        # Write the sorted_list to a file
+        with open(FILE_NAME, 'w') as f:
+            current_time = datetime.now().strftime('%m-%d-%Y %I:%M%p')
+            f.write(f"{current_time}\n")
+            for entry in sorted_list:
+                f.write(f"{entry[0]} - {entry[1]}\n")
+    else:
+        print("Scraper won't run until it's past 8am the next day.")
