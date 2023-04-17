@@ -1,12 +1,27 @@
 {
-  "full_name": "John Doe",
-  "ssn": "123-45-6789",
+  "first_name": "John",
+  "last_name": "Doe",
+  "ssn": "121-44-6089",
   "date_of_birth": "01-01-1985",
-  "contact_information": {
-    "residential_address": "123 Main Street, Anytown, NY 12345",
+  "uses_paper": false,
+  "different_mailing_address": true,
+  "contact_info": {
+    "address": "123 Main Street",
+    "city": "Anytown",
+    "state": "NY",
+    "zip": "12345",
     "mailing_address": "123 Main Street, Anytown, NY 12345",
-    "phone_number": "555-123-4567",
-    "email_address": "john.doe@example.com"
+    "phone_number": "304-838-5236",
+    "email": "john.doe@example.com"
+  },
+  "mailing_info": {
+    "address": "123 Main Street",
+    "city": "Anytown",
+    "state": "NY",
+    "zip": "12345",
+    "mailing_address": "123 Main Street, Anytown, NY 12345",
+    "phone_number": "304-838-5236",
+    "email": "john.doe@example.com"
   },
   "government_issued_id": {
     "id_type": "driver_license",
@@ -18,8 +33,12 @@
     "document_type": "utility_bill",
     "document_date": "03-01-2023"
   },
-  "employment_information": {
-    "occupation": "Software Engineer",
+  "employment_info": {
+    "employed": true,
+    "occupation": "Engineer",
     "annual_income": "90000"
+  },
+  "tax_info": {
+    "withholding": false
   }
 }
