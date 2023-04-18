@@ -27,6 +27,149 @@ class User:
         self.tax_info = user['tax_info']
 
 
+async def citizens_signup(info):
+    bank = SignUp("Citizens", "https://application.citizensaccess.com/openaccount/?productType=3000&productTerm=&openingAmount#!/acctopening")
+    user = User(info)
+    print("Are you a current Citizens Customer?")
+    start_input = int(input(
+        "1: Yes\n2: No\n: "
+    ))
+
+    class StartingOption(Enum):
+        Yes = 1
+        No = 2
+
+    options = [1, 2]
+    if start_input not in options:
+        print('Your response must be the numbers 1 or 2\n: ')
+        return -1
+    else:
+        if start_input == 1:
+            user_status = StartingOption.Yes
+        if start_input == 2:
+            user_status = StartingOption.No
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=False)
+        context = await browser.new_context()
+        page = await context.new_page()
+        await page.goto(bank.url)
+
+        await page.fill("#amount0", "0.01")
+
+        # Go to next page
+        await page.wait_for_selector("button:text('Continue')")
+        await page.click("button:text('Continue')")
+
+        await page.wait_for_selector("#first-name")
+        await page.fill("#first-name", user.first_name)
+        await page.fill("#last-name", user.last_name)
+
+        # Go to next page
+        await page.click("button:text('Continue')")
+        await page.wait_for_selector("#email-address")
+
+        await page.fill("#email-address", user.contact_info['email'])
+        await page.fill("#confirm-email-address", user.contact_info['email'])
+
+        # Go to next page
+        await page.click("#button-4")
+        await page.wait_for_selector("#mobile-phone-number")
+
+        await page.fill("#mobile-phone-number", user.contact_info['phone_number'])
+
+        # Go to next page
+        await page.click("#button-6")
+        await page.wait_for_selector("#primary-street")
+
+        await page.fill('#primary-street', user.contact_info['address'])
+        # TODO: apt or suite option
+        await page.fill('#primary-city', user.contact_info['city'])
+        await page.select_option('#primary-state', user.contact_info['state'])
+        await page.fill("#primary-zip-code", user.contact_info['zip'])
+
+        if user.different_mailing_address:
+            await page.click("button:text('+ Add mailing address (if different from residential address)')")
+            await page.fill('#secondary-street', user.contact_info['address'])
+            # TODO: apt or suite option
+            await page.fill('#secondary-city', user.contact_info['city'])
+            await page.select_option('#secondary-state', user.contact_info['state'])
+            await page.fill("#secondary-zip-code", user.contact_info['zip'])
+        await page.click("button:text('Continue')")
+
+        # Go to next page
+        await page.wait_for_selector("button:text('Continue')")
+        await page.click("button:text('Continue')")
+
+        # TODO: specific employment status
+        if user.employment_info['employed']:
+            await page.click("#button-0")
+        else:
+            await page.click('#button-4')
+
+        # TODO: greater option support instead of hardcoded
+        await page.select_option("#job-title", "Engineer/Scientist")
+
+        # Go to next page
+        await page.wait_for_selector("button:text('Continue')")
+        await page.click("button:text('Continue')")
+
+        salary = int(user.employment_info['annual_income'])
+        if salary == 0:
+            await page.click("button:text('No income')")
+        elif salary <= 50000:
+            await page.click("button:text('$1 - $50,000')")
+        elif salary <= 100000:
+            await page.click("button:text('$50,000 - $100,000')")
+        elif salary <= 150000:
+            await page.click("button:text('$100,000 - $150,000')")
+        elif salary <= 250000:
+            await page.click("button:text('$150,000 - $250,000')")
+        else:
+            await page.click("button:text('Over $250,000')")
+
+        await page.click("button:text('Continue')")
+
+        # Go to next page
+        await page.wait_for_selector("#date-of-birth")
+        await page.fill("#date-of-birth", user.date_of_birth.replace("-", ""))
+        await page.fill("#ssn-or-itin", user.ssn)
+        await page.click("button:text('Continue')")
+
+        await page.wait_for_selector("p:text('I certify the following:')")
+        await page.click("p:text('I certify the following:')")
+        await page.click("button:text('Continue')")
+
+        await page.wait_for_selector("label[for='ods-radio-2-input']")
+        await page.click("label[for='ods-radio-2-input']")
+        await page.click("button:text('Continue')")
+
+        # Go to next page
+        await page.wait_for_selector("label[for='withholding-no-input']")
+        if user.tax_info['withholding']:
+            await page.click("label[for='withholding-yes-input']")
+        else:
+            await page.click("label[for='withholding-no-input']")
+        await page.click("label[for='ods-checkbox-6-input']")
+        await page.click("button:text('Continue')")
+
+        # Go to next page
+        await page.wait_for_selector("#fund-later-button")
+        await page.click("#fund-later-button")
+
+        # Go to next page
+        await page.wait_for_selector("#button-open-account")
+        await page.click("#button-open-account")
+
+        input('Account ready.')
+        # Go to next page, finish submit.
+        await page.wait_for_selector("#button-0")
+        await page.click("#button-0")
+
+        time.sleep(999)
+
+
+
 async def capital_one_signup(info):
     bank = SignUp("Capital One", "https://apply.capitalone.com/index.html#/getting-started?productId=3800")
     user = User(info)
@@ -294,4 +437,5 @@ if __name__ == '__main__':
     with open('account_information.json', 'r') as outfile:
         data = json.load(outfile)
     # asyncio.run(amex_signup(data))
-    asyncio.run(capital_one_signup(data))
+    # asyncio.run(capital_one_signup(data))
+    asyncio.run(citizens_signup(data))
