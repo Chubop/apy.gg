@@ -140,12 +140,12 @@ async def capital_one_signup(info):
         await page.fill("#ssn-or-itin", user.ssn)
         await page.click("button:text('Continue')")
 
-        await page.wait_for_selector("label[for='ods-checkbox-6-input']")
-        await page.click("label[for='ods-checkbox-6-input']")
+        await page.wait_for_selector("p:text('I certify the following:')")
+        await page.click("p:text('I certify the following:')")
         await page.click("button:text('Continue')")
 
-        await page.wait_for_selector("label[for='ods-radio-1-input']")
-        await page.click("label[for='ods-radio-1-input']")
+        await page.wait_for_selector("label[for='ods-radio-2-input']")
+        await page.click("label[for='ods-radio-2-input']")
         await page.click("button:text('Continue')")
 
         # Go to next page
@@ -154,7 +154,8 @@ async def capital_one_signup(info):
             await page.click("label[for='withholding-yes-input']")
         else:
             await page.click("label[for='withholding-no-input']")
-        await page.click("labela[for='ods-checkbox-6-input']")
+        await page.click("label[for='ods-checkbox-6-input']")
+        await page.click("button:text('Continue')")
 
         # Go to next page
         await page.wait_for_selector("#fund-later-button")
