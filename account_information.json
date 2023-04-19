@@ -36,7 +36,8 @@
   "employment_info": {
     "employed": true,
     "occupation": "Engineer",
-    "annual_income": "90000"
+    "annual_income": "90000",
+    "source_of_income": "Employment"
   },
   "tax_info": {
     "withholding": false
